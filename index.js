@@ -1,5 +1,6 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
+const generateHtml = require("./generateHTML");
 
 const questions = [
     {
@@ -14,6 +15,8 @@ const questions = [
         choices: ["Green", "Blue", "Pink", "Red"]
     }
 ];
+
+
 
 function init() {
     inquirer.prompt(questions)
