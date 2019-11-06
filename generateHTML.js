@@ -27,8 +27,9 @@ const colors = {
 
 // const fs = require("fs");
 // fs.writeFile("html-build.html", generateHTML({color:"blue"}),function(){})
-
-function generateHTML(data) {
+module.exports = {
+  generateHTML: function (data, gitData) {
+    // console.log(gitData)
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -173,5 +174,58 @@ function generateHTML(data) {
             zoom: .75; 
           } 
          }
-      </style>`
-        }
+      </style>
+      </head>
+
+<body>
+  <container>
+    <div class="wrapper">
+      <div class="photo-header">
+        <img src="${gitData.data.avatar_url}" alt="">
+        <h1>Hello</h1>
+        <h2>My name is ${gitData.data.name}</h2>
+        <h5>Currently @ ${gitData.data.company}</h5>
+        <span class="links-nav nav-link"><a href=""><i class="fas fa-location-arrow"></i> ${gitData.data.location}</a> &nbsp;&nbsp;<a href=""><i
+            class="fab fa-github-alt"></i> GitHub</a>&nbsp;&nbsp;<a href=""><i class="fas fa-rss"></i> Blog</a></span>
+      </div>
+      <main>
+        <div class="row">
+          <div class="col">
+            <h2><br>${gitData.data.bio}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <h2>Public Repositories</h2>
+              <h4>${gitData.data.public_repos}</h4>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+                <h2>Followers</h2>
+                <h4>${gitData.data.public_repos}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card">
+                <h2>GitHub Stars</h2>
+                <h4>--NEED VALUE--</h4>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+                <h2>Following</h2>
+                <h4>${gitData.data.following}</h4>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </container>
+</body>
+</html>`
+}
+};

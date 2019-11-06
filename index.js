@@ -1,6 +1,7 @@
 const fs = require("fs");
+const axios = require("axios");
 const inquirer = require("inquirer");
-const generateHtml = require("./generateHTML");
+const generateHTML = require("./generateHTML");
 
 const questions = [
     {
@@ -11,8 +12,8 @@ const questions = [
     {
         type: "list",
         message: "What is your favorite color?",
-        name: "fav_color",
-        choices: ["Green", "Blue", "Pink", "Red"]
+        name: "color",
+        choices: ["green", "blue", "pink", "red"]
     }
 ];
 
@@ -20,13 +21,34 @@ const questions = [
 
 function init() {
     inquirer.prompt(questions)
-    .then(function(response) {
-        console.log(response);
-        const fileData = JSON.stringify(response, null, 2)
-        fs.writeFile("test.json", fileData, function(err){
-          console.log(err);
-        })
-    });
+        .then(function (response) {
+            console.log(response);
+            // const fileData = JSON.stringify(response, null, 2)
+            // fs.writeFile("test.json", fileData, function (err) {
+            //     console.log(err);
+            // })
+            const queryUrl = `https://api.github.com/users/${response.name}`;
+            axios
+                .get(queryUrl)
+                .then(function (res) {
+                    // const repoNames = res.data.map(function (repo) {
+                    //     console.log(repo.name);
+                    //     return repo.name;
+                    // });
+
+                    // const repoNamesStr = repoNames.join("\n");
+
+                    // fs.writeFile("repos.txt", repoNamesStr, function (err) {
+                    //     if (err) { throw err; }
+                    // })
+
+                    console.log(response);
+                    // console.log(typeof generateHTML.generateHTML);
+                    fs.writeFile("html-build.html", generateHTML.generateHTML(response, res), function (err) {
+                        if (err) { throw err; }
+                    })
+                });
+        });
 }
 
 init();
