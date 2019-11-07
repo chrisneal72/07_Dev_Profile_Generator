@@ -28,8 +28,7 @@ const colors = {
 // const fs = require("fs");
 // fs.writeFile("html-build.html", generateHTML({color:"blue"}),function(){})
 module.exports = {
-  generateHTML: function (data, gitData) {
-    // console.log(gitData)
+  generateHTML: function (data, gitData, starCount) {
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -212,7 +211,7 @@ module.exports = {
           <div class="col">
             <div class="card">
                 <h2>GitHub Stars</h2>
-                <h4>--NEED VALUE--</h4>
+                <h4>${starCount}</h4>
             </div>
           </div>
           <div class="col">
