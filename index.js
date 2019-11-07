@@ -30,19 +30,25 @@ async function init() {
             axios.get(queryUrl),
             axios.get(queryUrl2)
         ]);
-        
+            //I HAD IT THIS WAY, THE ABOVE METHOD SENDS THE CALLS AT THE SAME TIME
+            //KEEPING THESE HERE FOR MY OWN REF
         // const gitHubCall = await axios.get(queryUrl);
         // const gitHubStaredCall =  await axios.get(queryUrl2);
         
-        //I COULD HAVE DONE THIS INLINE, BUT I WANTED TO MAKE A FUNCTION
+            //I COULD HAVE DONE THIS INLINE, BUT I WANTED TO MAKE A FUNCTION
         const myCount = getStarCount(gitHubStaredCall);
-        //I KNOW I AM ASKING FOR A USERNAME AND IT IS SET TO NAME
-        //THE GITHUB CALL OVERWRITES THE NAME, I'M NOT WORRIED ABOUT 
-        //THIS BECAUSE THE GITHUB CALL HAS THE USERNAME
+            //FOUND THIS AT WORK, TEST WHEN AT SCHOOL
+            //MAY NEED TO MOVE THE .length TO TO OBJECT ASSIGNMENT BUT I CAN 
+            //NOT UNTIL I TEST SO I HAVE IT SITTING HERE...
+        //const myCount = Object.keys(gitHubStaredCall).length;
+        
+            //I KNOW I AM ASKING FOR A USERNAME AND IT IS SET TO NAME
+            //THE GITHUB CALL OVERWRITES THE NAME, I'M NOT WORRIED ABOUT 
+            //THIS BECAUSE THE GITHUB CALL HAS THE USERNAME
         const compiledData = { ...response, ...gitHubCall.data };
         compiledData.star_count = myCount;
         myHTML = generateHTML.generateHTML(compiledData);
-        //I DON'T NEED TO SAME THE HTML FILE BUT IT DOES NOT HURT ANYTHING TO DO IT
+            //I DON'T NEED TO SAVE THE HTML FILE BUT IT DOES NOT HURT ANYTHING TO DO IT
         fs.writeFile("html-build.html", myHTML, function (err) {
             if (err) { throw err; }
         });
@@ -82,7 +88,7 @@ function buildPDF(htmlString) {
 init();
 
 //MY FIRST RUN OF THE LOGIC BEFORE SWITCHING TO THE AWAIT SYNTAX
-//SAVING IT FOR MYSELF
+//SAVING IT FOR MY OWN REF
     // var myCount = 0, key;
     // inquirer.prompt(questions)
     //     .then(function (response) {
