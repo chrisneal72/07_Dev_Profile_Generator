@@ -30,21 +30,11 @@ async function init() {
             axios.get(queryUrl),
             axios.get(queryUrl2)
         ]);
-            //I HAD IT THIS WAY, THE ABOVE METHOD SENDS THE CALLS AT THE SAME TIME
-            //KEEPING THESE HERE FOR MY OWN REF
-        // const gitHubCall = await axios.get(queryUrl);
-        // const gitHubStaredCall =  await axios.get(queryUrl2);
         
-            //I COULD HAVE DONE THIS INLINE, BUT I WANTED TO MAKE A FUNCTION
-        const myCount = getStarCount(gitHubStaredCall);
-            //FOUND THIS AT WORK, TEST WHEN AT SCHOOL
-            //MAY NEED TO MOVE THE .length TO TO OBJECT ASSIGNMENT BUT I CAN 
-            //NOT UNTIL I TEST SO I HAVE IT SITTING HERE...
-        //const myCount = Object.keys(gitHubStaredCall).length;
-        
-            //I KNOW I AM ASKING FOR A USERNAME AND IT IS SET TO NAME
-            //THE GITHUB CALL OVERWRITES THE NAME, I'M NOT WORRIED ABOUT 
-            //THIS BECAUSE THE GITHUB CALL HAS THE USERNAME
+            //MAKE THE OBJ AN ARRAY AND GET THE LENGTH
+        const myCount = Object.keys(gitHubStaredCall).length;
+            //I KNOW I AM ASKING FOR A USERNAME AND IT IS SET TO NAME THE GITHUB CALL OVERWRITES THE NAME, I'M NOT WORRIED ABOUT 
+            //THIS BECAUSE THE GITHUB CALL HAS THE USERNAME IF I STILL NEED IT
         const compiledData = { ...response, ...gitHubCall.data };
         compiledData.star_count = myCount;
         myHTML = generateHTML.generateHTML(compiledData);
@@ -59,13 +49,6 @@ async function init() {
     buildPDF(myHTML);
 }
 
-function getStarCount(gitHubStaredCall) {
-    let starCount = 0, key;
-    for (key in gitHubStaredCall) {
-        if (gitHubStaredCall.hasOwnProperty(key)) starCount++;
-    }
-    return starCount;
-}
 
 function buildPDF(htmlString) {
     //THIS IS ALL CODE FROM ELECTRON-HTML-TO DOCS
@@ -86,32 +69,3 @@ function buildPDF(htmlString) {
 }
 
 init();
-
-//MY FIRST RUN OF THE LOGIC BEFORE SWITCHING TO THE AWAIT SYNTAX
-//SAVING IT FOR MY OWN REF
-    // var myCount = 0, key;
-    // inquirer.prompt(questions)
-    //     .then(function (response) {
-    //         const queryUrl = `https://api.github.com/users/${response.name}`;
-    //         axios
-    //             .get(queryUrl)
-    //             .then(function (res) {
-    //                 const queryUrl2 = `https://api.github.com/users/${response.name}/starred`;
-    //                 axios
-    //                     .get(queryUrl2)
-    //                     .then(function (res2) {
-    //                         for (key in res2) {
-    //                             if (res2.hasOwnProperty(key)) myCount++;
-    //                         }
-    //                     })
-    //                     .then(function () {
-    //                         console.log(myCount)
-    //                         myHTML = generateHTML.generateHTML(response, res, myCount);
-    //                         fs.writeFile("html-build.html", generateHTML.generateHTML(response, res, myCount), function (err) {
-    //                             if (err) { throw err; }
-    //                         });
-    //                     })
-    //             })
-    //     }).catch(function (err) {
-    //         console.log(err);
-    //     });
