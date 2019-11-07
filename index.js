@@ -33,8 +33,12 @@ async function init() {
         
         // const gitHubCall = await axios.get(queryUrl);
         // const gitHubStaredCall =  await axios.get(queryUrl2);
-
+        
+        //I COULD HAVE DONE THIS INLINE, BUT I WANTED TO MAKE A FUNCTION
         const myCount = getStarCount(gitHubStaredCall);
+        //I KNOW I AM ASKING FOR A USERNAME AND IT IS SET TO NAME
+        //THE GITHUB CALL OVERWRITES THE NAME, I'M NOT WORRIED ABOUT 
+        //THIS BECAUSE THE GITHUB CALL HAS THE USERNAME
         const compiledData = { ...response, ...gitHubCall.data };
         compiledData.star_count = myCount;
         myHTML = generateHTML.generateHTML(compiledData);
@@ -58,6 +62,7 @@ function getStarCount(gitHubStaredCall) {
 }
 
 function buildPDF(htmlString) {
+    //THIS IS ALL CODE FROM ELECTRON-HTML-TO DOCS
     var conversion = electronHtmlTo({
         converterPath: electronHtmlTo.converters.PDF
     });
@@ -69,6 +74,7 @@ function buildPDF(htmlString) {
 
         result.stream.pipe(fs.createWriteStream('./profile.pdf'));
         conversion.kill(); 
+        //USING THE OPEN PACKAGE FOR THIS LINE
         open('./profile.pdf')
     });
 }
@@ -76,6 +82,7 @@ function buildPDF(htmlString) {
 init();
 
 //MY FIRST RUN OF THE LOGIC BEFORE SWITCHING TO THE AWAIT SYNTAX
+//SAVING IT FOR MYSELF
     // var myCount = 0, key;
     // inquirer.prompt(questions)
     //     .then(function (response) {
