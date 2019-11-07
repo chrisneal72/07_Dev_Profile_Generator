@@ -28,8 +28,8 @@ const colors = {
 // const fs = require("fs");
 // fs.writeFile("html-build.html", generateHTML({color:"blue"}),function(){})
 module.exports = {
-  generateHTML: function (data, gitData, starCount) {
-  return `<!DOCTYPE html>
+  generateHTML: function (data) {
+    return `<!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="UTF-8" />
@@ -176,55 +176,59 @@ module.exports = {
       </style>
       </head>
 
-<body>
-  <container>
-    <div class="wrapper">
-      <div class="photo-header">
-        <img src="${gitData.data.avatar_url}" alt="">
-        <h1>Hello</h1>
-        <h2>My name is ${gitData.data.name}</h2>
-        <h5>Currently @ ${gitData.data.company}</h5>
-        <span class="links-nav nav-link"><a href=""><i class="fas fa-location-arrow"></i> ${gitData.data.location}</a> &nbsp;&nbsp;<a href=""><i
-            class="fab fa-github-alt"></i> GitHub</a>&nbsp;&nbsp;<a href=""><i class="fas fa-rss"></i> Blog</a></span>
+      <body>
+      <div class="wrapper">
+         <div class="photo-header">
+            <img src="${data.avatar_url}" alt="Photo of Tucker Beauchamp" />
+            <h1>Hi!</h1>
+            <h2>
+            My name is ${data.name}!</h1>
+            <h5></h5>
+            <nav class="links-nav">
+               <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/place/${data.location}"><i class="fas fa-location-arrow"></i> ${data.location}</a>
+               <a class="nav-link" target="_blank" rel="noopener noreferrer" href="${data.html_url}"><i class="fab fa-github-alt"></i> GitHub</a>
+               
+            </nav>
+         </div>
+         <main>
+            <div class="container">
+            <div class="row">
+               <div class="col">
+                  <h3>${data.bio}</h3>
+               </div>
+               </div>
+               <div class="row">
+               <div class="col">
+                  <div class="card">
+                    <h3>Public Repositories</h3>
+                    <h4>${data.public_repos}</h4>
+                  </div>
+               </div>
+                <div class="col">
+                <div class="card">
+                  <h3>Followers</h3>
+                  <h4>${data.public_repos}</h4>
+                </div>
+               </div>
+               </div>
+               <div class="row">
+               <div class="col">
+               <div class="card">
+                  <h3>GitHub Stars</h3>
+                  <h4>${data.star_count}</h4>
+                  </div>
+               </div>
+                <div class="col">
+                <div class="card">
+                  <h3>Following</h3>
+                  <h4>${data.following}</h4>
+                  </div>
+               </div>
+               </div>
+            </div>
+         </main>
       </div>
-      <main>
-        <div class="row">
-          <div class="col">
-            <h2><br>${gitData.data.bio}</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="card">
-              <h2>Public Repositories</h2>
-              <h4>${gitData.data.public_repos}</h4>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-                <h2>Followers</h2>
-                <h4>${gitData.data.public_repos}</h4>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="card">
-                <h2>GitHub Stars</h2>
-                <h4>${starCount}</h4>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-                <h2>Following</h2>
-                <h4>${gitData.data.following}</h4>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-  </container>
-</body>
-</html>`
-}
+      </body>
+      </html>`
+  }
 };
