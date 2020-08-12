@@ -20,7 +20,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
-    "electron": "^5.0.13",
+    "electron": "^7.2.4",
     "electron-html-to": "^2.6.0",
     "inquirer": "^7.3.3",
     "open": "^7.1.0"
